@@ -5,6 +5,9 @@
 #include "MatrixOutputs.hpp"
 #include "Exp_A.hpp"
 
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+
 using namespace std;
 
 #define eps 2.22e-16
@@ -14,6 +17,7 @@ void main( void )
 	int k;
 	//char array for file name
 	char Name[ 64 ];
+	FILE *fout;
 	matrix A, exp_Adt, x( 3 ), b( 3 );
 	double dt, // Time Step
 		TimeInterval = 6, // Time interval for simulationl
@@ -25,7 +29,7 @@ void main( void )
 		ki,
 		alpha = Tg*Ts,
 		beta = Tg + Ts;
-	FILE *fout;
+	
 	// Allocate and set up system matrix.
 	A = matrix( 3, 3 );
 	// Check for valid allocation of A
@@ -35,6 +39,7 @@ void main( void )
 		getchar( );
 		return;
 	} // end of check for valid allocation of A
+	
 	// Load state variable matrix.
 	for ( ki = 0; ki <= 4; ki += 2 )
 	{
@@ -100,3 +105,4 @@ void main( void )
 	getchar( );
 	return;
 } // end of main
+#endif
